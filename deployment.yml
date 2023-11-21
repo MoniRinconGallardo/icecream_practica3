@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: icecream-api
+  labels:
+    app: icecream-api
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      octopuseexport: octopuseexport
+  template:
+    metadata:
+      labels:
+        app: icecream-api
+        octopuseexport: octopuseexport
+    spec:
+      containers:
+      - name: icecream-api
+        image: icecream-api:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
